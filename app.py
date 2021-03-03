@@ -15,5 +15,23 @@ def home():
 
     return 'ok'
 
+@app.route('/add')
+def add():
+
+    user1 = User(username='user1', email='email1@gmail.com')
+    user2 = User(username='user2', email='email2@gmail.com')
+    db.session.add(user1)
+    db.session.add(user2)
+    db.session.commit()
+
+    return 'ok'
+
+@app.route('/read')
+def Read():
+
+    users = User.query.all()
+
+    return f'{users[0].username}:{users[0].email}<br>{users[1].username}:{users[1].email}'
+
 if __name__ == '__main__':
     app.run(debug=True)
